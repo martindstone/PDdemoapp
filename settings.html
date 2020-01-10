@@ -15,16 +15,16 @@
         var default_order_value = "$1079.99";
 
         function save() {
-            sessionStorage.setItem('routing_key', $('#routing-key').val() || default_routing_key);
-            sessionStorage.setItem('order_value', $('#order-value').val() || default_order_value);
-            sessionStorage.setItem('customer_name', $('#customer-name').val() || default_customer_name);
+            localStorage.setItem('routing_key', $('#routing-key').val() || default_routing_key);
+            localStorage.setItem('order_value', $('#order-value').val() || default_order_value);
+            localStorage.setItem('customer_name', $('#customer-name').val() || default_customer_name);
             window.history.back();
         }
 
         function main() {
-            $('#routing-key').val(sessionStorage.getItem('routing_key') || default_routing_key);
-            $('#order-value').val(sessionStorage.getItem('order_value') || default_order_value);
-            $('#customer-name').val(sessionStorage.getItem('customer_name') || default_customer_name);
+            $('#routing-key').val(localStorage.getItem('routing_key') || default_routing_key);
+            $('#order-value').val(localStorage.getItem('order_value') || default_order_value);
+            $('#customer-name').val(localStorage.getItem('customer_name') || default_customer_name);
             $('#save').click(save);
         }
 

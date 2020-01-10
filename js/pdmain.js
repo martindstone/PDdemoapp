@@ -139,9 +139,9 @@ function sendLowRevenueWarning(routing_key, customer_name, system_route, order_v
 }
 
 function sendEvents() {
-    customer_name = sessionStorage.getItem('customer_name') || default_customer_name;
-    routing_key = sessionStorage.getItem('routing_key') || default_routing_key;
-    order_value = sessionStorage.getItem('order_value') || default_order_value;
+    customer_name = localStorage.getItem('customer_name') || default_customer_name;
+    routing_key = localStorage.getItem('routing_key') || default_routing_key;
+    order_value = localStorage.getItem('order_value') || default_order_value;
     sendNewRelicEvent(routing_key, customer_name, "/cart.html", order_value);
     setTimeout(function() {
         sendZabbixEvent(routing_key, customer_name, "/cart.html", order_value);
