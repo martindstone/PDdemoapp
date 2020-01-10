@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" http-equiv="Cache-control" content="NO-CACHE">
+    <title>PhoneDuty &mdash; </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        var default_routing_key = "R027OEE3GZ98CUTP0O70D2E0W0EN3BOJ";
+        var default_customer_name = "nobody@pagerduty.com";
+        var default_order_value = "$1079.99";
+
+        function save() {
+            sessionStorage.setItem('routing_key', $('#routing-key').val() || default_routing_key);
+            sessionStorage.setItem('order_value', $('#order-value').val() || default_order_value);
+            sessionStorage.setItem('customer_name', $('#customer-name').val() || default_customer_name);
+            window.history.back();
+        }
+
+        function main() {
+            $('#routing-key').val(sessionStorage.getItem('routing_key') || default_routing_key);
+            $('#order-value').val(sessionStorage.getItem('order_value') || default_order_value);
+            $('#customer-name').val(sessionStorage.getItem('customer_name') || default_customer_name);
+            $('#save').click(save);
+        }
+
+        $(document).ready(main);
+    </script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            &nbsp;
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h1>Settings</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div align="right" class="col-md-4">
+                Routing Key:
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="routing-key">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div align="right" class="col-md-4">
+                Customer Name (email):
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="customer-name">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div align="right" class="col-md-4">
+                Order Value:
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="order-value">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div align="right" class="col-md-8">
+                <button class="btn btn-primary" id="save">Save</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
