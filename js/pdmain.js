@@ -27,6 +27,44 @@ function PDCEFEvent(event) {
     });
 }
 
+function PDChange(event) {
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        contentType: 'application/json',
+        url: "https://events.pagerduty.com/v2/change/enqueue",
+        data: JSON.stringify(event),
+        success: function(data) {
+            console.log(`Success:`);
+            console.log(data);
+        },
+        error: function(error) {
+            console.log(`Error:`);
+            console.log(error);
+        }
+    });
+}
+
+function sendChangeEvent(routing_key) {
+    var changeDate = new Date();
+    changeDate.setMinutes (changeDate.getMinutes() - 30);
+    
+    var event = {
+        "routing_key": routing_key,
+        "payload": {
+            "summary": "Build Success: Upgrade ecommerce Java backend",
+            "timestamp": changeDate.toISOString(),
+            "source": "CircleCI",
+            "custom_details": {
+                "build_state Value": "passed",
+                "build_number": "2"
+            }
+        }
+    };
+    PDChange(event);
+    console.log(event);
+}
+
 function sendNewRelicEvent(routing_key, customer_name, system_route, order_value) {
     var event = {
         "payload": {
@@ -143,6 +181,7 @@ function sendEvents() {
     routing_key = localStorage.getItem('routing_key') || default_routing_key;
     order_value = localStorage.getItem('order_value') || default_order_value;
     sendNewRelicEvent(routing_key, customer_name, "/cart.html", order_value);
+    sendChangeEvent(routing_key);
     setTimeout(function() {
         sendZabbixEvent(routing_key, customer_name, "/cart.html", order_value);
     }, 2000);
